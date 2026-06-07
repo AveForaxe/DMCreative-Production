@@ -1,0 +1,485 @@
+@import "tailwindcss";
+
+:root {
+  --color-background: #131313;
+  --color-surface: #131313;
+  --color-surface-container: #20201f;
+  --color-surface-container-low: #1c1b1b;
+  --color-surface-container-high: #2a2a2a;
+  --color-surface-container-highest: #353535;
+  --color-surface-container-lowest: #0e0e0e;
+  --color-surface-bright: #393939;
+  --color-on-surface: #e5e2e1;
+  --color-on-surface-variant: #cfc4c5;
+  --color-on-background: #e5e2e1;
+  --color-primary: #c6c6c6;
+  --color-on-primary: #303030;
+  --color-outline: #988e90;
+  --color-outline-variant: #4c4546;
+  --color-on-tertiary-container: #757575;
+  --color-brand-red: #e63946;
+  --color-brand-red-dark: #c52f3b;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-hairline: #333333;
+
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  --transition-fast: 200ms ease;
+  --transition-base: 300ms ease;
+  --transition-slow: 500ms ease;
+  --transition-glacial: 700ms ease;
+}
+
+/* ================================================================
+   1. Reset & Global Base Styles
+   ================================================================ */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-container-high);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-red);
+}
+
+/* ================================================================
+   2. Custom Layouts & Utilities
+   ================================================================ */
+
+/* Marquee / Infinite Slider */
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.clients-slider {
+  mask-image: linear-gradient(to right, transparent 0, black 6%, black 94%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, black 6%, black 94%, transparent 100%);
+}
+
+.clients-slider::before,
+.clients-slider::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  width: clamp(2.5rem, 8vw, 4.5rem);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.clients-slider::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(19, 19, 19, 1), rgba(19, 19, 19, 0));
+}
+
+.clients-slider::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(19, 19, 19, 1), rgba(19, 19, 19, 0));
+}
+
+.clients-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 42s linear infinite;
+  animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.client-logo {
+  transform-origin: center;
+  filter: grayscale(1) saturate(0.85);
+  opacity: 0.62;
+  transition:
+    transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 400ms ease,
+    filter 400ms ease;
+  will-change: transform, opacity, filter;
+}
+
+.client-logo:hover {
+  opacity: 1;
+  filter: grayscale(0) drop-shadow(0 12px 18px rgba(230, 57, 70, 0.14));
+  transform: translateY(-2px) scale(1.04);
+}
+
+/* Reveal Transitions */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 {
+  transition-delay: 0.1s;
+}
+.reveal-delay-2 {
+  transition-delay: 0.2s;
+}
+.reveal-delay-3 {
+  transition-delay: 0.3s;
+}
+.reveal-delay-4 {
+  transition-delay: 0.4s;
+}
+
+/* Preloader Fill */
+@keyframes preloaderFill {
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes preloaderSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes preloaderFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes cameraPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  35% {
+    transform: scale(1.03);
+    opacity: 0.75;
+  }
+  55% {
+    transform: scale(1.08);
+    opacity: 0.9;
+  }
+  75% {
+    transform: scale(1.02);
+    opacity: 0.55;
+  }
+}
+
+@keyframes shutterFlash {
+  0%,
+  82%,
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  84% {
+    opacity: 0.9;
+    transform: scale(1.35);
+  }
+  86% {
+    opacity: 0.35;
+    transform: scale(1.18);
+  }
+  88% {
+    opacity: 0.05;
+    transform: scale(1);
+  }
+}
+
+@keyframes preloaderDrift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.28;
+  }
+  50% {
+    transform: translate3d(10px, -14px, 0) scale(1.03);
+    opacity: 0.52;
+  }
+  100% {
+    transform: translate3d(-8px, 8px, 0) scale(0.98);
+    opacity: 0.28;
+  }
+}
+
+.preloader-bar-fill-anim {
+  animation: preloaderFill 1.5s 0.6s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.preloader-orb-one,
+.preloader-orb-two {
+  animation: preloaderDrift 8s ease-in-out infinite;
+}
+
+.preloader-orb-two {
+  animation-delay: -3s;
+}
+
+.preloader-camera-shell {
+  animation: preloaderFloat 3s ease-in-out infinite;
+}
+
+.preloader-flash {
+  animation: shutterFlash 1.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(230, 57, 70, 0.08) 35%,
+    transparent 70%
+  );
+}
+
+.preloader-lens-ring,
+.preloader-lens-pulse {
+  transform-origin: center;
+  animation: cameraPulse 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.preloader-lens-pulse {
+  animation-delay: -0.6s;
+}
+
+.preloader-flash-dot {
+  animation: shutterFlash 1.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.preloader-shine {
+  animation: preloaderFill 1.8s 0.9s ease-in-out forwards;
+  opacity: 0.15;
+}
+
+/* Custom Cursor */
+.custom-cursor {
+  position: fixed;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--color-white);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transition:
+    width 0.3s ease,
+    height 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  display: none;
+}
+
+@media (min-width: 1024px) and (hover: hover) {
+  .custom-cursor {
+    display: block;
+  }
+}
+
+.custom-cursor.hovering {
+  width: 48px;
+  height: 48px;
+  border-color: var(--color-brand-red);
+}
+
+/* Hero CTA Buttons */
+.hero-cta-button {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transform: translateZ(0);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+  transition:
+    transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 220ms ease,
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease;
+}
+
+.hero-cta-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), transparent 35%);
+  opacity: 0;
+  transform: translateX(-100%);
+  transition:
+    opacity 220ms ease,
+    transform 320ms ease;
+  z-index: -1;
+}
+
+.hero-cta-button:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 18px 36px rgba(230, 57, 70, 0.18);
+}
+
+.hero-cta-button:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.hero-cta-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.hero-cta-primary {
+  background: linear-gradient(135deg, var(--color-brand-red), #ff6b72);
+  color: var(--color-white);
+}
+
+.hero-cta-primary:hover {
+  background: linear-gradient(135deg, #ff7781, var(--color-brand-red-dark));
+}
+
+.hero-cta-secondary {
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: var(--color-white);
+  backdrop-filter: blur(8px);
+}
+
+.hero-cta-secondary:hover {
+  border-color: rgba(230, 57, 70, 0.95);
+  color: var(--color-brand-red);
+  box-shadow: 0 18px 36px rgba(230, 57, 70, 0.18);
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .clients-track {
+    animation: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ================================================================
+   Navigation Animations (DotsNav Sidebar)
+   ================================================================ */
+
+/* CSS custom properties for timing */
+:root {
+  --transition-spring: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Dot: active glow pulse (infinite, subtle) */
+@keyframes dot-glow-pulse {
+  0% {
+    box-shadow: 0 0 4px rgba(230, 57, 70, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(230, 57, 70, 0.55);
+  }
+  100% {
+    box-shadow: 0 0 4px rgba(230, 57, 70, 0.4);
+  }
+}
+
+/* Apply glow pulse to active dot */
+a[aria-current="page"] div {
+  animation: dot-glow-pulse 2.4s ease-in-out infinite;
+}
+
+/* Sidebar fade-in */
+@keyframes sidebar-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+nav[role="navigation"].opacity-100 {
+  animation: sidebar-fade-in 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Focus-visible brand outline for nav interactive elements */
+nav[role="navigation"] a:focus-visible,
+nav[role="navigation"] button:focus-visible {
+  outline: 2px solid #e63946;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Respect prefers-reduced-motion for navigation */
+@media (prefers-reduced-motion: reduce) {
+  a[aria-current="page"] div {
+    animation: none;
+  }
+
+  nav[role="navigation"].opacity-100 {
+    animation: none;
+  }
+}
+
+/* Print: hide sidebar */
+@media print {
+  nav[role="navigation"] {
+    display: none !important;
+  }
+}
+
+/* High contrast: stronger dot outline */
+@media (prefers-contrast: more) {
+  a[aria-current="page"] div {
+    box-shadow: 0 0 12px rgba(230, 57, 70, 0.8);
+    outline: 2px solid #e63946;
+  }
+}
