@@ -59,7 +59,9 @@ export default function Hero() {
   };
 
   const handleReel = () => {
-    document.getElementById("portfolio")?.scrollIntoView({ behavior: "smooth" });
+    document
+      .getElementById("portfolio")
+      ?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -128,7 +130,6 @@ export default function Hero() {
 
       {/* ── Clients Strip — anchored to bottom, no box ── */}
       <div className="clients-hero relative z-10 w-full pb-16 md:pb-12">
-
         {/* Divider with centered label */}
         <div className="flex items-center gap-5 px-6 md:px-14 lg:px-20 mb-7">
           <div className="flex-1 h-px bg-outline-variant/40" />
@@ -144,7 +145,6 @@ export default function Hero() {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-
           {/* Track */}
           <div
             className="clients-track will-change-transform"
@@ -177,7 +177,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
     </section>
   );
 }

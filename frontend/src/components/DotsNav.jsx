@@ -201,7 +201,7 @@ export default function DotsNav() {
       </nav>
 
       {/* Mobile Bottom Nav — only on mobile */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-surface-container-lowest border-t border-outline-variant flex justify-around items-center h-16 px-2">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex justify-around items-center h-16 px-2 bg-[rgba(19,19,19,0.92)] backdrop-blur-xl shadow-[0_-10px_30px_rgba(0,0,0,0.35)] border-t border-white/5">
         {SECTIONS.map((section) => {
           const isActive = activeSection === section.id;
           return (

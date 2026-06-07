@@ -77,8 +77,20 @@ body {
 }
 
 .clients-slider {
-  mask-image: linear-gradient(to right, transparent 0, black 6%, black 94%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0, black 6%, black 94%, transparent 100%);
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 6%,
+    black 94%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 6%,
+    black 94%,
+    transparent 100%
+  );
 }
 
 .clients-slider::before,
@@ -93,12 +105,20 @@ body {
 
 .clients-slider::before {
   left: 0;
-  background: linear-gradient(to right, rgba(19, 19, 19, 1), rgba(19, 19, 19, 0));
+  background: linear-gradient(
+    to right,
+    rgba(19, 19, 19, 1),
+    rgba(19, 19, 19, 0)
+  );
 }
 
 .clients-slider::after {
   right: 0;
-  background: linear-gradient(to left, rgba(19, 19, 19, 1), rgba(19, 19, 19, 0));
+  background: linear-gradient(
+    to left,
+    rgba(19, 19, 19, 1),
+    rgba(19, 19, 19, 0)
+  );
 }
 
 .clients-track {
@@ -343,7 +363,11 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), transparent 35%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.18),
+    transparent 35%
+  );
   opacity: 0;
   transform: translateX(-100%);
   transition:
@@ -385,6 +409,63 @@ body {
   border-color: rgba(230, 57, 70, 0.95);
   color: var(--color-brand-red);
   box-shadow: 0 18px 36px rgba(230, 57, 70, 0.18);
+}
+
+/* CTA Form & Button Enhancements */
+.cta-field {
+  border-radius: 14px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+}
+
+.cta-field:focus {
+  border-color: rgba(230, 57, 70, 0.95);
+  box-shadow:
+    0 0 0 3px rgba(230, 57, 70, 0.16),
+    0 14px 28px rgba(0, 0, 0, 0.22);
+  transform: translateY(-1px);
+}
+
+.cta-submit-button {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--color-brand-red), #ff6b72);
+  box-shadow: 0 18px 32px rgba(230, 57, 70, 0.18);
+  transition:
+    transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 220ms ease,
+    filter 220ms ease;
+}
+
+.cta-submit-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.18),
+    transparent 35%
+  );
+  opacity: 0;
+  transform: translateX(-100%);
+  transition:
+    opacity 220ms ease,
+    transform 320ms ease;
+}
+
+.cta-submit-button:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 24px 36px rgba(230, 57, 70, 0.24);
+  filter: saturate(1.08);
+}
+
+.cta-submit-button:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.cta-submit-button:active {
+  transform: translateY(0) scale(0.98);
 }
 
 /* Reduced Motion Override */

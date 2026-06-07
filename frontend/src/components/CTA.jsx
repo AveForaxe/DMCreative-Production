@@ -83,17 +83,17 @@ export default function CTA() {
             name="name"
             required
             placeholder="Nama Lengkap"
-            className="w-full px-5 py-4 bg-surface-container border border-outline-variant text-white placeholder:text-on-tertiary-container text-sm focus:outline-none focus:border-brand-red transition-colors"
+            className="cta-field w-full px-5 py-4 bg-surface-container border border-outline-variant text-white placeholder:text-on-tertiary-container text-sm focus:outline-none transition-all duration-300"
           />
           <input
             name="phone"
             required
             placeholder="Nomor WhatsApp"
-            className="w-full px-5 py-4 bg-surface-container border border-outline-variant text-white placeholder:text-on-tertiary-container text-sm focus:outline-none focus:border-brand-red transition-colors"
+            className="cta-field w-full px-5 py-4 bg-surface-container border border-outline-variant text-white placeholder:text-on-tertiary-container text-sm focus:outline-none transition-all duration-300"
           />
           <select
             name="event"
-            className="w-full px-5 py-4 bg-surface-container border border-outline-variant text-white text-sm focus:outline-none focus:border-brand-red transition-colors appearance-none cursor-pointer"
+            className="cta-field w-full px-5 py-4 bg-surface-container border border-outline-variant text-white text-sm focus:outline-none transition-all duration-300 appearance-none cursor-pointer"
           >
             <option value="Photography">Photography</option>
             <option value="Videography">Videography</option>
@@ -104,11 +104,11 @@ export default function CTA() {
             name="message"
             rows={3}
             placeholder="Ceritakan acara Anda..."
-            className="w-full px-5 py-4 bg-surface-container border border-outline-variant text-white placeholder:text-on-tertiary-container text-sm focus:outline-none focus:border-brand-red transition-colors resize-none"
+            className="cta-field w-full px-5 py-4 bg-surface-container border border-outline-variant text-white placeholder:text-on-tertiary-container text-sm focus:outline-none transition-all duration-300 resize-none"
           />
           <button
             type="submit"
-            className="w-full py-4 bg-brand-red text-white font-bold tracking-[0.2em] uppercase text-sm hover:bg-brand-red-dark transition-all duration-300 cursor-pointer"
+            className="cta-submit-button w-full py-4 text-white font-bold tracking-[0.2em] uppercase text-sm cursor-pointer"
           >
             Kirim Permintaan
           </button>
